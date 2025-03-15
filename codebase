@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Side Hustle Generator</title>
+  <style>
+    body {
+      background-color: #FFDAB9; /* soft peach */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    /* Centered banner container */
+    .banner-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .banner-container img {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+    }
+    /* Main container */
+    .container {
+      position: relative; /* for modal positioning */
+      width: 90%;
+      max-width: 600px;
+      background-color: #B0E0E6; /* complementary pastel blue */
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 26px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 1.3;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #DCEEFF; /* light blue for form controls */
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #ff7f50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff6347;
+    }
+    /* Modal overlay */
+    .modal {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    /* Centered modal content */
+    .modal-content {
+      background-color: #DCEEFF;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid #888;
+      border-radius: 8px;
+      padding: 20px;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .close {
+      color: #aaa;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 13px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      button {
+        font-size: 14px;
+      }
+      .modal-content {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Centered Fiverr banner using the new banner code -->
+  <div class="banner-container">
+    <a href="https://go.fiverr.com/visit/?bta=1038398&nci=16971" target="_top">
+      <img border="0" src="https://fiverr.ck-cdn.com/tn/serve/?cid=40209919" width="1456" height="180">
+    </a>
+  </div>
+  
+  <div class="container">
+    <h1>Side Hustle Generator</h1>
+    
+    <!-- Primary Goal -->
+    <div class="form-group">
+      <label for="goal">Primary Goal:</label>
+      <select id="goal">
+        <option value="extra_income">Extra Income</option>
+        <option value="learn_skill">Learn a New Skill</option>
+        <option value="build_business">Build a Business</option>
+        <option value="pursue_passion">Pursue Passion</option>
+      </select>
+    </div>
+    
+    <!-- Skill Selection -->
+    <div class="form-group">
+      <label for="skill">Select Your Main Skill:</label>
+      <select id="skill">
+        <option value="writing">Writing</option>
+        <option value="coding">Coding</option>
+        <option value="design">Design</option>
+        <option value="teaching">Teaching</option>
+        <option value="athletics">Athletics (Personal Training)</option>
+        <option value="sales">Sales</option>
+        <option value="marketing">Marketing</option>
+      </select>
+    </div>
+    
+    <!-- Skill Level -->
+    <div class="form-group">
+      <label for="skillLevel">Skill Level:</label>
+      <select id="skillLevel">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
+    
+    <!-- Hours per Week -->
+    <div class="form-group">
+      <label for="hours">Hours per Week:</label>
+      <select id="hours">
+        <option value="less5">Less than 5</option>
+        <option value="5to10">5-10</option>
+        <option value="10to20">10-20</option>
+        <option value="20plus">20+</option>
+      </select>
+    </div>
+    
+    <!-- Available Capital -->
+    <div class="form-group">
+      <label for="capitalAmount">Available Capital ($):</label>
+      <input type="number" id="capitalAmount" min="0" placeholder="Enter your available capital">
+    </div>
+    
+    <button id="generateBtn">Generate Side Hustle Idea</button>
+    
+    <!-- Modal for displaying suggestion -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <div id="result"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Open modal function
+    function openModal() {
+      document.getElementById("modal").style.display = "block";
+    }
+    // Close modal function
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+    
+    // Generate side hustle suggestion based on inputs
+    document.getElementById("generateBtn").addEventListener("click", function() {
+      var goal = document.getElementById("goal").value;
+      var skill = document.getElementById("skill").value;
+      var skillLevel = document.getElementById("skillLevel").value;
+      var hours = document.getElementById("hours").value;
+      var capitalAmount = parseFloat(document.getElementById("capitalAmount").value) || 0;
+      
+      var hoursText;
+      switch(hours) {
+        case "less5":
+          hoursText = "a few hours";
+          break;
+        case "5to10":
+          hoursText = "5 to 10 hours";
+          break;
+        case "10to20":
+          hoursText = "10 to 20 hours";
+          break;
+        case "20plus":
+          hoursText = "20 or more hours";
+          break;
+        default:
+          hoursText = "";
+      }
+      
+      var suggestion = "";
+      if (skill === "writing") {
+        suggestion = "you might consider freelance content writing or blogging. This option requires minimal startup investment and can quickly generate extra income.";
+      } else if (skill === "coding") {
+        suggestion = "you could explore freelance software development or web/app development projects, which are in high demand.";
+      } else if (skill === "design") {
+        suggestion = "you may look into freelance graphic design, such as logo creation or social media branding, to start earning extra income.";
+      } else if (skill === "teaching") {
+        suggestion = "you might consider online tutoring or creating digital courses that can be offered on various learning platforms.";
+      } else if (skill === "athletics") {
+        suggestion = "you could pursue personal training or virtual fitness coaching, leveraging your expertise in athletics to help others reach their fitness goals.";
+      } else if (skill === "sales") {
+        suggestion = "you might consider commission-based sales or affiliate marketing, leveraging your ability to connect with customers and drive revenue.";
+      } else if (skill === "marketing") {
+        suggestion = "you could explore freelance digital marketing or social media management, using your marketing expertise to help businesses grow online.";
+      }
+      
+      if (capitalAmount === 0) {
+        suggestion += " Since you're aiming to keep startup costs low, consider starting with free platforms and organic social media marketing.";
+      } else {
+        suggestion += " With an available budget of $" + capitalAmount.toFixed(2) + ", investing in quality equipment or targeted marketing can help boost your success.";
+      }
+      
+      suggestion += " With " + hoursText + " per week available, tailor your approach to ensure you deliver high-quality service without overwhelming your schedule.";
+      
+      var goalText = "";
+      if (goal === "extra_income") {
+        goalText = "generating extra income";
+      } else if (goal === "learn_skill") {
+        goalText = "learning a new skill";
+      } else if (goal === "build_business") {
+        goalText = "building a business";
+      } else if (goal === "pursue_passion") {
+        goalText = "pursuing your passion";
+      }
+      
+      var finalMessage = "Based on your goal of " + goalText + ", here's a side hustle idea: " + suggestion;
+      
+      document.getElementById("result").innerHTML = finalMessage;
+      openModal();
+    });
+  </script>
+</body>
+</html>
